@@ -1,5 +1,5 @@
 # otus-basic-homeworks
-OTUS C++ basic course Webseite https://otus.ru/
+OTUS C++ basic course website https://otus.ru/
 
 This repository was created for learning purposses, it contains the
 homework and additional materials that were worked on diring the course.
