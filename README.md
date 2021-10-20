@@ -8,7 +8,7 @@ homework and additional materials that were worked on diring the course.
 STATUS:
 
 homework 01 [x]
-homework 02 [ ]
+homework 02 [x]
 homework 03 [ ]
 homework 04 [ ] 
 homework 05 [ ]
