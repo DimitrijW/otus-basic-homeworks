@@ -2,31 +2,31 @@
 
 int main ()
 {
+    const std::string high_scores_filename = "high_scores.txt";
+    int attempts_count = 0;
+    std::string user_name;
+
     while(true)
     {
         switch (menuGame())
         {
         case 1:
-            cout << "case 1" << endl;
-            //youName();
+            imputUsername(user_name);
             do
             {
-                checkValue();
-                cout << "01" << endl;
+                checkValue(attempts_count);
             } while(false);
-            // int read_tabele();
+            write(user_name, high_scores_filename, attempts_count);
             break;
         case 2:
-            cout << "case 2" << endl;
-            // int read_tabele();
+            read(high_scores_filename);
             break;
         case 3:
-            cout << "case 3" << endl;
             endGame();
             break;
         
         default:
-            cout << "ERROR: unknow case number " << endl;
+            std::cout << "ERROR: only choose 1, 2, 3" << std::endl;
             break;
         }
     }

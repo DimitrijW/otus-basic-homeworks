@@ -1,23 +1,19 @@
-#include <iostream>
+#ifndef GUESSINGGAME_H_
+#define GUESSINGGAME_H_
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
 #include <time.h>
 #include <string>
-using namespace std;
+#include <fstream>
 
-/*  */
 int menuGame();
-/* youName funktion liest deine name  */
-void youName();
-/* the function generirt belibige wert von 1 bis 100 */
-int valueGenerator();
-/*  */
-int cinValue();
-/*  */
-int checkValue();
-/*  */
-int read_tabele();
-int write_tabele();
-//int tabele();
+void imputUsername(std::string& user_name);
+/* the function generates any value from 1 to 100 */
+int generator();
+int inputValue();
+int checkValue(int& attempts_count);
+bool read(std::string high_scores_filename);
+bool write(std::string user_name, std::string high_scores_filename, int attempts_count);
 void endGame();
+
+#endif /* GUESSINGGAME_H_ */

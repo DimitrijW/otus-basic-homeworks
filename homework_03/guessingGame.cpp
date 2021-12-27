@@ -3,63 +3,59 @@
 int menuGame()
 {
     int menuCnt = 0;
-    cout << "-----GUESSING-GAME-----" << endl;
-    cout << "[1] GAME START" << endl;
-    cout << "[2] TABELE ansehen" << endl;
-    cout << "[3] END" << endl;
-    cin >> menuCnt;
+    std::cout << "=====> GUESSING-GAME <=====" << std::endl;
+    std::cout << "[1] GAME START" << std::endl;
+    std::cout << "[2] VIEW RECORDS" << std::endl;
+    std::cout << "[3] END" << std::endl;
+    std::cin >> menuCnt;
     return(menuCnt);
 }
 
-void youName()
+void imputUsername(std::string& user_name)
 {
-    char youName[10];
-    char *pyouName = youName;
-    cout << "you NAME: ";
-    cin >> youName;
-    cout << youName << endl;
+    std::cout << "Enter your name, please: ";
+    std::cin >> user_name;
+    std::cout << user_name << std::endl;
 }
 
-int valueGenerator()
+int generator()
 {
-    cout << "valueGenerator()" << endl;
     srand(time(nullptr));
     const int max_value = 100;
     const int random_value = rand() % 100;
     return(random_value);
 }
 
-int cinValue()
+int inputValue()
 {
     int guessValue = 0;
     int *pguessValue = &guessValue; 
-    cout << "you VALUE: ";
-    cin >> guessValue;
+    std::cout << "your VALUE: ";
+    std::cin >> guessValue;
     return(guessValue);
 } 
 
-int checkValue()
+int checkValue(int& attempts_count)
 {
-    cout << "checkValue()" << endl;
-    int sollValue = valueGenerator();
+    int setpoint = generator();
     bool win = 0;
     do
     {
-        int istValue = cinValue();
-        if(sollValue < istValue)
+        int actualValue = inputValue();
+        if(setpoint < actualValue)
         {
-            cout << " < " << endl; 
+            std::cout << " less [<] " << std::endl; 
         }
-        if(sollValue > istValue)
+        if(setpoint > actualValue)
         {
-            cout << " > " << endl;
+            std::cout << " greater [>] " << std::endl;
         }
-        if(sollValue == istValue)
+        if(setpoint == actualValue)
         {
-            cout << "YOU WINN" << endl;
+            std::cout << "YOU WINN" << std::endl;
             char frage;
-            cout << "noch mal yes->[y] no->[n]: ";
-            cin >> frage;
+            std::cout << "afresh YES->[y] NO->[any key]: ";
+            std::cin >> frage;
             if(frage == 'y')
             {
                 win = 0;
@@ -69,39 +65,52 @@ int checkValue()
                 win = 1;
             }
         }
+        attempts_count++;
     } while (win == false);
     return(true);
 }
 
-/* int read_tabele()
+bool read(std::string high_scores_filename)
 {
-
-} */
-
-/* int write_tabele()
-{
-
-} */
-
-/* int tabele(std::fstream& file)
-{
-    cout << "read_write_file_example:" << endl;
-    if(!file-is_open())
+    std::ifstream in_file { high_scores_filename };
+    if(!in_file.is_open())
     {
-        std::cout << "Error! File was not opened!" << std::endl;
-        return false; // besser in main 
+        std::cout << "FAILED open file for read" << high_scores_filename << "!" << std::endl;
+        return -1;
     }
+    std::string username;
+    int high_score = 0;
+    while(true)
+    {
+        in_file >> username;
+        in_file >> high_score;
+        in_file.ignore();
 
+        if(in_file.fail())
+        {
+            break;
+        }
+        std::cout << username << '\t' << high_score << std::endl;
+    }
+    return 0;
+}
 
-        const std::string filename2 = "testFile2.txt";
-    std::fstream io_file(filename2, std::ios_base::in | std::ios_base::out | std::fstream::app);
-    tabele(io_file);
-    int tabelle;
-    return(tabelle);
-} */
+bool write(std::string user_name, std::string gameFile, int attempts_count)
+{ 
+    std::ofstream out_file{gameFile, std::ios_base::app};
+    if(!out_file.is_open())
+    {
+        std::cout << "FAILED open file for write" << gameFile << "!" << std::endl;
+        return -1;
+    }
+    out_file << user_name << " ";
+    out_file << attempts_count;
+    out_file << std::endl;
+    return 0;
+}
 
 void endGame()
 {
-    cout << "END" << endl;
+    std::cout << "GAME END" << std::endl;
     exit(EXIT_SUCCESS);
 }
