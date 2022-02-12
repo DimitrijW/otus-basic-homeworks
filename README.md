@@ -9,7 +9,7 @@ STATUS:
 
 homework 01 [x]
 homework 02 [x]
-homework 03 [-]
+homework 03 [x]
 homework 04 [-] 
 homework 05 [-]
 homework 06 [-]
